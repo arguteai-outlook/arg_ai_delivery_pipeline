@@ -6,9 +6,6 @@ import os
 from arg_ai.db import connect
 
 
-MIGRATIONS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "..", "migrations")
-
-
 def _ensure_migrations_table(conn) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -23,7 +20,14 @@ def _ensure_migrations_table(conn) -> None:
 
 
 def migrate() -> None:
-    migrations = sorted(glob.glob(os.path.join(MIGRATIONS_DIR, "*.sql")))
+    # Milestone 1: migrations are repo-local and Git-canonical.
+    # Assumption: commands are run from repo root.
+    migrations_dir = os.path.join(os.getcwd(), "migrations")
+    migrations = sorted(glob.glob(os.path.join(migrations_dir, "*.sql")))
+
+    if not migrations:
+        raise RuntimeError(f"no migrations found in: {migrations_dir}")
+
     with connect() as conn:
         _ensure_migrations_table(conn)
 
