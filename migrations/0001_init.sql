@@ -1,9 +1,13 @@
 CREATE TABLE IF NOT EXISTS runs (
-    run_token TEXT PRIMARY KEY,
-    project_id TEXT NOT NULL,
-    status TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    finished_at TIMESTAMPTZ NULL
+  run_token TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL,
+  status TEXT NOT NULL,
+  mode TEXT NOT NULL DEFAULT 'local',
+  pr_url TEXT,
+  branch_name TEXT,
+  commit_sha TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS artifacts (
