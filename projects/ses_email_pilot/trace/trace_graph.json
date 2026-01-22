@@ -1,8 +1,85 @@
 {
-  "edges": [],
-  "last_run_token": "20260120T155516Z_b9f41292",
-  "nodes": [],
-  "notes": "milestone_1_stub",
+  "edges": [
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "local://arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
+      "type": "produced_pr"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:validate_repo",
+      "type": "ran_gate"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:lint",
+      "type": "ran_gate"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:unit_tests",
+      "type": "ran_gate"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_fmt",
+      "type": "ran_gate"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_validate",
+      "type": "ran_gate"
+    },
+    {
+      "from": "0ec47e3fbe68f035980e3f8bf0497156",
+      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_plan",
+      "type": "ran_gate"
+    }
+  ],
+  "generated_at": "2026-01-22T04:19:25.996420+00:00",
+  "mode": "pr",
+  "nodes": [
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156",
+      "type": "run"
+    },
+    {
+      "branch_name": "arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
+      "commit_sha": "5cf876e25cb989bd061c4204f181b7dda14c78f1",
+      "id": "local://arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
+      "type": "pr"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:validate_repo",
+      "status": "pass",
+      "type": "gate"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:lint",
+      "status": "fail",
+      "type": "gate"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:unit_tests",
+      "status": "pass",
+      "type": "gate"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_fmt",
+      "status": "skip",
+      "type": "gate"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_validate",
+      "status": "skip",
+      "type": "gate"
+    },
+    {
+      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_plan",
+      "status": "skip",
+      "type": "gate"
+    }
+  ],
   "project_id": "ses_email_pilot",
-  "updated_at": "2026-01-20T15:55:16.651866+00:00"
+  "run_token": "0ec47e3fbe68f035980e3f8bf0497156"
 }
