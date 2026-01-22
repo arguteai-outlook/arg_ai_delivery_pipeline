@@ -1,7 +1,6 @@
 import json
 import os
 import secrets
-from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -10,7 +9,6 @@ from arg_ai.db.repo import ArtifactRow, artifact_upsert, gate_upsert, run_create
 from arg_ai.orchestrator.gates import GateResult, run_gate
 from arg_ai.orchestrator.vcs_local_git import create_pr_via_local_git
 from arg_ai.util.hashing import file_sha256
-
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -38,16 +36,17 @@ def _write_json(path: Path, obj: Any) -> None:
 
 
 def _index_file_as_artifact(run_token: str, artifact_type: str, path: Path, project_id: str) -> None:
-    sha = file_sha256(path)
+    checksum = file_sha256(path)
     size = path.stat().st_size
     artifact_upsert(
         ArtifactRow(
             run_token=run_token,
+            project_id=project_id,
             artifact_type=artifact_type,
             path=str(path).replace("\\", "/"),
-            sha256=sha,
+            checksum_sha256=checksum,
             size_bytes=size,
-            metadata={"project_id": project_id},
+            content_type="application/json",
         )
     )
 

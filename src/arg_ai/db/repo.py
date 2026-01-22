@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Optional
 
 from arg_ai.db.conn import get_conn
 
@@ -9,11 +9,12 @@ from arg_ai.db.conn import get_conn
 @dataclass(frozen=True)
 class ArtifactRow:
     run_token: str
+    project_id: str
     artifact_type: str
     path: str
-    sha256: str
+    checksum_sha256: str
     size_bytes: int
-    metadata: dict[str, Any]
+    content_type: str = "application/json"
 
 
 def run_create(run_token: str, project_id: str, mode: str) -> None:
@@ -25,7 +26,8 @@ def run_create(run_token: str, project_id: str, mode: str) -> None:
             )
             VALUES (%s, %s, %s, %s, NOW(), NOW(), NULL)
             ON CONFLICT (run_token) DO UPDATE
-            SET status = EXCLUDED.status,
+            SET project_id = EXCLUDED.project_id,
+                status = EXCLUDED.status,
                 mode = EXCLUDED.mode,
                 updated_at = NOW();
             """,
@@ -62,22 +64,34 @@ def artifact_upsert(row: ArtifactRow) -> None:
     with get_conn() as (conn, cur):
         cur.execute(
             """
-            INSERT INTO artifacts (run_token, artifact_type, path, sha256, size_bytes, metadata_json, created_at, updated_at)
-            VALUES (%s, %s, %s, %s, %s, %s::JSONB, NOW(), NOW())
+            INSERT INTO artifacts (
+              run_token,
+              project_id,
+              artifact_type,
+              path,
+              content_type,
+              checksum_sha256,
+              size_bytes,
+              created_at,
+              updated_at
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
             ON CONFLICT (run_token, path) DO UPDATE
-            SET artifact_type = EXCLUDED.artifact_type,
-                sha256 = EXCLUDED.sha256,
+            SET project_id = EXCLUDED.project_id,
+                artifact_type = EXCLUDED.artifact_type,
+                content_type = EXCLUDED.content_type,
+                checksum_sha256 = EXCLUDED.checksum_sha256,
                 size_bytes = EXCLUDED.size_bytes,
-                metadata_json = EXCLUDED.metadata_json,
                 updated_at = NOW();
             """,
             (
                 row.run_token,
+                row.project_id,
                 row.artifact_type,
                 row.path,
-                row.sha256,
+                row.content_type,
+                row.checksum_sha256,
                 row.size_bytes,
-                json.dumps(row.metadata),
             ),
         )
         conn.commit()

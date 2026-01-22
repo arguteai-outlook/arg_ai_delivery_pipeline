@@ -26,14 +26,18 @@ EXPECTED_COLUMNS: dict[str, set[str]] = {
         "finished_at",
     },
     "artifacts": {
+        # existing baseline columns
         "run_token",
         "artifact_type",
         "path",
-        "sha256",
         "size_bytes",
-        "metadata_json",
         "created_at",
         "updated_at",
+        # columns present in your actual DB schema (canonical for now)
+        "artifact_id",
+        "checksum_sha256",
+        "content_type",
+        "project_id",
     },
     "gates": {
         "gate_id",
@@ -50,7 +54,6 @@ EXPECTED_COLUMNS: dict[str, set[str]] = {
         "updated_at",
     },
 }
-
 
 def verify_db_schema() -> int:
     issues: list[VerifyIssue] = []
