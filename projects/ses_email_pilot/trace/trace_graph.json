@@ -1,85 +1,85 @@
 {
   "edges": [
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "local://arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "local://arg_ai/run_1019a6d01741718dd33b2c422d748172",
       "type": "produced_pr"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:validate_repo",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:validate_repo",
       "type": "ran_gate"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:lint",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:lint",
       "type": "ran_gate"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:unit_tests",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:unit_tests",
       "type": "ran_gate"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_fmt",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:terraform_fmt",
       "type": "ran_gate"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_validate",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:terraform_validate",
       "type": "ran_gate"
     },
     {
-      "from": "0ec47e3fbe68f035980e3f8bf0497156",
-      "to": "0ec47e3fbe68f035980e3f8bf0497156:terraform_plan",
+      "from": "1019a6d01741718dd33b2c422d748172",
+      "to": "1019a6d01741718dd33b2c422d748172:terraform_plan",
       "type": "ran_gate"
     }
   ],
-  "generated_at": "2026-01-22T04:19:25.996420+00:00",
+  "generated_at": "2026-01-22T04:45:29.884762+00:00",
   "mode": "pr",
   "nodes": [
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156",
+      "id": "1019a6d01741718dd33b2c422d748172",
       "type": "run"
     },
     {
-      "branch_name": "arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
-      "commit_sha": "5cf876e25cb989bd061c4204f181b7dda14c78f1",
-      "id": "local://arg_ai/run_0ec47e3fbe68f035980e3f8bf0497156",
+      "branch_name": "arg_ai/run_1019a6d01741718dd33b2c422d748172",
+      "commit_sha": "daebeacaf1178e1056c0257dab78efdcf7f3dfb6",
+      "id": "local://arg_ai/run_1019a6d01741718dd33b2c422d748172",
       "type": "pr"
     },
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:validate_repo",
+      "id": "1019a6d01741718dd33b2c422d748172:validate_repo",
       "status": "pass",
       "type": "gate"
     },
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:lint",
-      "status": "fail",
-      "type": "gate"
-    },
-    {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:unit_tests",
+      "id": "1019a6d01741718dd33b2c422d748172:lint",
       "status": "pass",
       "type": "gate"
     },
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_fmt",
+      "id": "1019a6d01741718dd33b2c422d748172:unit_tests",
+      "status": "pass",
+      "type": "gate"
+    },
+    {
+      "id": "1019a6d01741718dd33b2c422d748172:terraform_fmt",
       "status": "skip",
       "type": "gate"
     },
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_validate",
+      "id": "1019a6d01741718dd33b2c422d748172:terraform_validate",
       "status": "skip",
       "type": "gate"
     },
     {
-      "id": "0ec47e3fbe68f035980e3f8bf0497156:terraform_plan",
+      "id": "1019a6d01741718dd33b2c422d748172:terraform_plan",
       "status": "skip",
       "type": "gate"
     }
   ],
   "project_id": "ses_email_pilot",
-  "run_token": "0ec47e3fbe68f035980e3f8bf0497156"
+  "run_token": "1019a6d01741718dd33b2c422d748172"
 }

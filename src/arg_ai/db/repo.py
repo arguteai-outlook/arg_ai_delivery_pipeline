@@ -97,55 +97,6 @@ def artifact_upsert(row: ArtifactRow) -> None:
         conn.commit()
 
 
-def run_finalize(
-    run_token: str,
-    status: str,
-    pr_url: Optional[str] = None,
-    branch_name: Optional[str] = None,
-    commit_sha: Optional[str] = None,
-) -> None:
-    with get_conn() as (conn, cur):
-        cur.execute(
-            """
-            UPDATE runs
-            SET status = %s,
-                pr_url = COALESCE(%s, pr_url),
-                branch_name = COALESCE(%s, branch_name),
-                commit_sha = COALESCE(%s, commit_sha),
-                updated_at = NOW(),
-                finished_at = NOW()
-            WHERE run_token = %s;
-            """,
-            (status, pr_url, branch_name, commit_sha, run_token),
-        )
-        conn.commit()
-
-
-def artifact_upsert(row: ArtifactRow) -> None:
-    with get_conn() as (conn, cur):
-        cur.execute(
-            """
-            INSERT INTO artifacts (run_token, artifact_type, path, sha256, size_bytes, metadata_json, created_at, updated_at)
-            VALUES (%s, %s, %s, %s, %s, %s::JSONB, NOW(), NOW())
-            ON CONFLICT (run_token, path) DO UPDATE
-            SET artifact_type = EXCLUDED.artifact_type,
-                sha256 = EXCLUDED.sha256,
-                size_bytes = EXCLUDED.size_bytes,
-                metadata_json = EXCLUDED.metadata_json,
-                updated_at = NOW();
-            """,
-            (
-                row.run_token,
-                row.artifact_type,
-                row.path,
-                row.sha256,
-                row.size_bytes,
-                json.dumps(row.metadata),
-            ),
-        )
-        conn.commit()
-
-
 def gate_upsert(
     run_token: str,
     gate_name: str,

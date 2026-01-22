@@ -1,7 +1,6 @@
 import json
 import os
 import secrets
-from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -10,8 +9,6 @@ from arg_ai.db.repo import ArtifactRow, artifact_upsert, gate_upsert, run_create
 from arg_ai.orchestrator.gates import GateResult, run_gate
 from arg_ai.orchestrator.vcs_local_git import create_pr_via_local_git
 from arg_ai.util.hashing import file_sha256
-
-from arg_ai.orchestrator_legacy import run_local
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -52,6 +49,7 @@ def _index_file_as_artifact(run_token: str, artifact_type: str, path: Path, proj
             content_type="application/json",
         )
     )
+
 
 def _gates_plan(project_id: str) -> list[tuple[str, Optional[list[str]], Optional[str]]]:
     repo_root = Path(os.getcwd())
