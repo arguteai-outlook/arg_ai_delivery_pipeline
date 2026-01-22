@@ -1,0 +1,15 @@
+image: python:3.11-slim
+
+pipelines:
+  default:
+    - step:
+        name: ci_gates
+        caches:
+          - pip
+        script:
+          - python -V
+          - pip install -U pip
+          - pip install -e ".[dev]"
+          - bash scripts/ci/run_gates.sh ci_artifacts
+        artifacts:
+          - ci_artifacts/**
